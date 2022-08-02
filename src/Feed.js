@@ -13,13 +13,22 @@ function Feed() {
     //     ))
     // },[])
 
+    const [messages, setMessages]=useState([]);
+
+    function addNote(note){
+        setMessages(prevNotes=>{
+            return [...prevNotes,note];
+        });
+    }
+
   return (
     <div className="feed">
     <div className="feed__header">
         <h2>Home</h2>
     </div>
-    <TweetBox />
-    
+    <TweetBox 
+        onAdd={addNote}
+    />
     {/* {posts.map(post=>(
         <Post 
         displayName={post.displayName}
@@ -30,6 +39,14 @@ function Feed() {
         image={post.image}
         />
     ))} */}
+    
+    {messages.map((allMessage)=>{
+        return <Post 
+            displayName={allMessage.displayName}
+            text={allMessage.text}
+            image={allMessage.image}
+        />
+    })}
 
     <Post 
         displayName="Shantanu Kumar Kar"
